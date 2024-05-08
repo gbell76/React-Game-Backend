@@ -34,10 +34,10 @@ router.post('/login', async(req, res) => {
     }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
     try{
         const newUser = new User(req.body)
-        newUser.save()
+        await newUser.save()
         const token = signToken(newUser)
         res.status(200).json({token, newUser})
     }catch(err){

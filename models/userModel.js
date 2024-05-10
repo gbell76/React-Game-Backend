@@ -3,7 +3,13 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true, trim: true, unique: true},
-    password: {type: String, required: true, trim: true, unique: true}
+    password: {type: String, required: true, trim: true, unique: true},
+    preferences: {
+      rows: {type: Number, default: 7},
+      columns: {type: Number, default: 5},
+      statPoints: {type: Number, default: 5},
+      actionPoints: {type: Number, default: 2},
+    },
 })
 
 // set up pre-save middleware to create password

@@ -23,7 +23,7 @@ router.get('/:id', async(req, res) => {
 router.post('/login', async(req, res) => {
     try{
         const result = await User.find({username: req.body.username})
-        const token = signToken(result)
+        const token = signToken({username: result[0].username, password: result[0].password, _id: result[0]._id})
         if(await result[0].isCorrectPassword(req.body.password)){
             res.status(200).json({token, result})
         }else{
